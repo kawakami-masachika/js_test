@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+  <title>TO DO LIST APP</title>
+</head>
+<body>
+  <div id="app">
+    <input type="text" ref="new_content" @keyup.enter="addTask">
+    <button v-on:click="addTask">追加</button><br>
+    <div v-for="item in todolists" v-bind:key="item.id">
+      <span>{{ item.id }}</span>
+      <span v-if="!item.isEditing" v-on:dblclick="editTask(item)">{{ item.content }}</span>
+      <input v-else type="text" v-model="item.content" v-on:blur="doneEdit(item)" v-on:keyup.enter="doneEdit(item)">
+      <!--<span>{{ item.isComplete }}</span>-->
+      <button v-on:click="changeState(item)">
+        <span v-if="item.isCompleted">完了</span>
+        <span v-else>未完了</span>
+      </button>
+      <button v-on:click="deleteTask(item)">削除</button>
+    </div>
+  </div>
+    <script src="index.js"></script>
+</body>
+</html>

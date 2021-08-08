@@ -1,0 +1,1 @@
+class MessageDelivery < De
